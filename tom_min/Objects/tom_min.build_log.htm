@@ -1,0 +1,57 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: ¶ÃVision V5.23.0.0
+Copyright (C) 2017 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: tom188 Microsoft, Microsoft, LIC=W9663-AEA7F-D29L7-EH88H-HXERD-RZUKW
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Professional  Version: 5.23
+Toolchain Path:  D:\program files (x86)\keil5\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.06 update 4 (build 422)
+Assembler:       Armasm.exe V5.06 update 4 (build 422)
+Linker/Locator:  ArmLink.exe V5.06 update 4 (build 422)
+Library Manager: ArmAr.exe V5.06 update 4 (build 422)
+Hex Converter:   FromElf.exe V5.06 update 4 (build 422)
+CPU DLL:         SARMCM3.DLL V5.23
+Dialog DLL:      DCM.DLL V1.15.0.0
+Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V2.0.18.0
+Dialog DLL:      TCM.DLL V1.27.0.0
+ 
+<h2>Project:</h2>
+F:\FreeRTOS_Study\tom_min\tom_min.uvprojx
+Project File Date:  08/17/2019
+
+<h2>Output:</h2>
+*** Using Compiler 'V5.06 update 4 (build 422)', folder: 'D:\program files (x86)\keil5\ARM\ARMCC\Bin'
+Build target 'Target 1'
+compiling main.c...
+.\User\include\Tom_Common_Api.h(17): warning:  #1-D: last line of file ends without a newline
+  #endif
+main\main.c(309): warning:  #550-D: variable "dataFromMCU"  was set but never used
+  	uint8_t dataFromMCU[]="hello tom\r\n";
+main\main.c(311): warning:  #177-D: variable "i"  was declared but never referenced
+  	uint8_t i,charSize=0;
+main\main.c(311): warning:  #550-D: variable "charSize"  was set but never used
+  	uint8_t i,charSize=0;
+main\main.c(312): warning:  #177-D: variable "flag"  was declared but never referenced
+  	static uint8_t flag=1;
+main\main.c(32): warning:  #177-D: variable "fac_ms"  was declared but never referenced
+  static u16 fac_ms=0;//ms—” ±±∂≥À ˝
+main\main.c: 6 warnings, 0 errors
+linking...
+Program Size: Code=9916 RO-data=400 RW-data=168 ZI-data=18784  
+FromELF: creating hex file...
+".\Objects\tom_min.axf" - 0 Error(s), 6 Warning(s).
+
+<h2>Collection of Component include folders:</h2>
+  .\RTE\_Target_1
+  D:\program files (x86)\keil5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include
+
+<h2>Collection of Component Files used:</h2>
+Build Time Elapsed:  00:00:03
+</pre>
+</body>
+</html>
