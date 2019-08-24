@@ -13,7 +13,7 @@ int main(void)
 	int fd,ret;
 
 	umask(0);
-	fd = open("177.txt",O_RDWR|O_CREAT,0666);
+	fd = open("188.txt",O_RDWR|O_CREAT,0666);
 	if(fd < 0)
 	{
 		perror("open failed\n");
