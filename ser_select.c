@@ -20,7 +20,7 @@ void sys_error(char *ch)
 	exit(1);
 }
 #define SER_PORT   6666
-#define SER_IP   	"192.168.0.222"
+#define SER_IP   	"192.168.3.199"
 
 
 typedef struct cli_1{
