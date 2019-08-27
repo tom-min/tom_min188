@@ -14,7 +14,7 @@
 
 
 #define SER_PORT 	6667
-#define SER_IP   	"192.168.0.222"
+#define SER_IP   	"192.168.3.199"
 
 
 typedef struct cli_1{

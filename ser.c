@@ -9,7 +9,7 @@
 
 
 #define SER_PORT 	8888
-#define SER_IP   	"192.168.0.222"
+#define SER_IP   	"192.168.3.199"
 
 
 void sys_error(char *ch)
