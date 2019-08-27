@@ -11,10 +11,13 @@
 
 #include <sys/time.h>
 #include <sys/epoll.h>
+#include <fcntl.h>
+#include <sys/resource.h>
+#include <errno.h>
 
 
-#define SER_PORT 	6667
-#define SER_IP   	"192.168.3.199"
+#define SER_PORT 	6666
+#define SER_IP   	"192.168.0.222"
 
 
 typedef struct cli_1{
@@ -54,6 +57,7 @@ int main(void)
 	struct epoll_event events[MAXEPOLLSIZE];
 	struct rlimit rt;
 	char buf[MAXLINE];
+	time_t tm;
 
 	rt.rlim_max = rt.rlim_cur = MAXEPOLLSIZE;
 	if((setrlimit(RLIMIT_NOFILE,&rt) == -1))
@@ -70,7 +74,7 @@ int main(void)
 	listenfd = socket(AF_INET,SOCK_STREAM,0);
 	if(listenfd < 0)
 		sys_error("socket");
-
+	
 	int on = 1;
 	setsockopt(listenfd,SOL_SOCKET,SO_REUSEADDR,&on,sizeof(on));
 
@@ -79,8 +83,8 @@ int main(void)
 		sys_error("bind");
 	}
 		
-	if(listen(servaddr,listenq));
-		sys_error("listen");
+	if(listen(listenfd,listenq) < 0)
+		sys_error("listen188");
 
 	printf("welcome to epoll_create\n");
 
@@ -88,16 +92,104 @@ int main(void)
 	ev.events = EPOLLIN|EPOLLET;
 	ev.data.fd = listenfd;
 
-	
+	if(epoll_ctl(kdpfd,EPOLL_CTL_ADD,listenfd,&ev) < 0)
+	{
+		fprintf(stderr,"epoll set insertion error: fd=%d\n",listenfd);
+		return -1;
+	}
+
+	curfds = 1;
+
+	printf("epollserver startup,port %d, max connection is %d, backlog is %d\n", SER_PORT, MAXEPOLLSIZE, listenq);
+
+	while(1)
+	{
+		nfds = epoll_wait(kdpfd,events,curfds,-1);
+		if(nfds < 0)
+			sys_error("epoll_wait");	
+
+		for(n = 0;n < nfds;n++)
+		{
+			//printf("tom1-----\r\n");
+			if(events[n].data.fd == listenfd)
+			{
+				//printf("tom2-----\r\n");
+				connfd = accept(listenfd,(struct sockaddr *)&cliaddr,&socklen);
+				if(connfd < 0)
+					sys_error("accept");
+
+				time(&tm);
+                	sprintf(buf, "accept form %s:%d\n", inet_ntoa(cliaddr.sin_addr), cliaddr.sin_port);
+				printf("%s %d:%s", ctime(&tm),++acceptCount, buf);
 			
+
+				if(curfds > MAXEPOLLSIZE)
+				{
+					fprintf(stderr,"too many connection, more than %d\n",curfds);
+					close(connfd);
+					continue;
+				}
+				if(setnonblocking(connfd) < 0)
+					perror("setnonblocking error");
+				
+				ev.events = EPOLLIN|EPOLLET; 
+				ev.data.fd = connfd;
+
+				if(epoll_ctl(kdpfd,EPOLL_CTL_ADD,connfd,&ev) < 0)
+				{
+					fprintf(stderr, "add socket '%d' to epoll failed: %s\n", connfd, strerror(errno));
+					return -1;
+				}
+				
+				curfds++;
+				continue;
+			}
+			if(handle(events[n].data.fd) < 0)
+			{
+				epoll_ctl(kdpfd,EPOLL_CTL_DEL,events[n].data.fd,&ev);
+				curfds--;
+			}
+			//printf("tom3-----\r\n");
+		}
 	
+	}
 	
-
-
-
-
+	close(listenfd);
 	
 	return 0;
 }
+
+
+int handle(int connfd)
+{
+	int ret;
+	char buf[MAXLINE];
+
+	printf("welcome to [%s]\n",__func__);
+	ret = read(connfd,buf,MAXLINE);
+	if(ret == 0)
+	{
+		printf("client close the connection\n");
+		close(connfd);
+		return -1;
+	}
+	else if(ret < 0)
+	{
+		perror("read\n");
+		close(connfd);
+		return -1;
+	}
+
+	printf("server read buf: %s\r\n",buf);
+	write(connfd,buf,strlen(buf));
+
+	return 0;
+}
+
+
+
+
+
+
 
 
