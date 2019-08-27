@@ -8,9 +8,9 @@
 #include <netinet/ip.h>
 #include <pthread.h>
 
-#include <sys/select.h>
-#include <sys/time.h>
 
+#include <sys/time.h>
+#include <sys/epoll.h>
 
 
 #define SER_PORT 	6667
@@ -31,6 +31,7 @@ void sys_error(char *ch)
 }
 
 
+#if 0
 int main(void)
 {
 	int 	ser_fd = -1;
@@ -152,30 +153,37 @@ printf("client addr: %s, client port: %d\n",inet_ntoa(cli.sin_addr.s_addr),ntohs
 }
 
 
+#else
 
+/*
+EPOLLIN:表示对应的文件描述符可以读
+EPOLLOUT:表示对应的文件描述符可以写
+EPOLLET: 将EPOLL设为边缘触发(Edge Triggered)模式
+*/
 
+int main(void)
+{
+	int i,epfd,nfds;
+	
+	struct epoll_event ev,events[5];
+	epfd = epoll_create(1);
+	ev.data.fd = STDIN_FILENO;
+	ev.events = EPOLLIN|EPOLLET;
+	epoll_ctl(epfd,EPOLL_CTL_ADD,STDIN_FILENO,&ev);
 
+	for(;;)
+	{
+		nfds = epoll_wait(epfd,events,5,-1);
+		for(i=0;i<nfds;i++)
+		{
+			if(events[i].data.fd == STDIN_FILENO)
+				printf("welcome to epoll's world!\n");
+		}
+	}
+	
+	return 0;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#endif
 
 
