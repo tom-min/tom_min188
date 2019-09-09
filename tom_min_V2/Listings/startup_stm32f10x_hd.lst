@@ -582,7 +582,7 @@ ARM Macro Assembler    Page 9
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M3 --apcs=interw
 ork --depend=.\objects\startup_stm32f10x_hd.d -o.\objects\startup_stm32f10x_hd.
 o -I.\RTE\_Target_1 -I"D:\program files (x86)\keil5\ARM\PACK\Keil\STM32F1xx_DFP
-\2.1.0\Device\Include" -I"D:\program files (x86)\keil5\ARM\CMSIS\Include" --pre
+\2.3.0\Device\Include" -I"D:\program files (x86)\keil5\ARM\CMSIS\Include" --pre
 
 
 

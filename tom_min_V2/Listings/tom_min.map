@@ -2761,30 +2761,30 @@ Image component sizes
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
          0          0          0          0          0       4572   core_cm3.o
-       242         38          0          0          0      10696   diskio.o
-      6154         44          0          6          0      27961   ff.o
-       304         40          0         24      17408       3339   heap_2.o
-       148          0          0          0          0       4274   list.o
-      1932       1000         85         49       2872      26285   main.o
-         0          0          0          0          0     203184   misc.o
-       404         48          0          4          0       8672   port.o
-      1302         14          0          0          0      20495   queue.o
-        26          0          0          8          0       3019   retarget.o
-        64         26        304          0       1024        864   startup_stm32f10x_hd.o
-       320         46          0          0          0       3141   stm3210e_eval.o
-      6958        334          0         40        180      28168   stm32_eval_sdio_sd.o
-       156         18          0          0          0       3901   stm32f10x_dma.o
-       278          0          0          0          0       1972   stm32f10x_gpio.o
-        20          0          0          0          0       2309   stm32f10x_it.o
-       276         32          0         20          0       4421   stm32f10x_rcc.o
-       372         86          0          0          0       9623   stm32f10x_sdio.o
-       348          6          0          0          0       4849   stm32f10x_usart.o
-       328         28          0          0          0      44521   system_stm32f10x.o
-      2030        332          0         60        200      24648   tasks.o
-      1150        108          0         20         40      11826   timers.o
+       242         38          0          0          0      10808   diskio.o
+      6154         44          0          6          0      28341   ff.o
+       304         40          0         24      17408       3391   heap_2.o
+       148          0          0          0          0       4342   list.o
+      1932       1000         85         49       2872      26525   main.o
+         0          0          0          0          0     203196   misc.o
+       404         48          0          4          0       8784   port.o
+      1302         14          0          0          0      20679   queue.o
+        26          0          0          8          0       3071   retarget.o
+        64         26        304          0       1024        876   startup_stm32f10x_hd.o
+       320         46          0          0          0       3201   stm3210e_eval.o
+      6958        334          0         40        180      28428   stm32_eval_sdio_sd.o
+       156         18          0          0          0       3953   stm32f10x_dma.o
+       278          0          0          0          0       1992   stm32f10x_gpio.o
+        20          0          0          0          0       2377   stm32f10x_it.o
+       276         32          0         20          0       4477   stm32f10x_rcc.o
+       372         86          0          0          0       9807   stm32f10x_sdio.o
+       348          6          0          0          0       4921   stm32f10x_usart.o
+       328         28          0          0          0      44625   system_stm32f10x.o
+      2030        332          0         60        200      24972   tasks.o
+      1150        108          0         20         40      12002   timers.o
 
     ----------------------------------------------------------------------
-     22840       2200        424        236      21724     452740   Object Totals
+     22840       2200        424        236      21724     455340   Object Totals
          0          0         32          0          0          0   (incl. Generated)
         28          0          3          5          0          0   (incl. Padding)
 
@@ -2851,8 +2851,8 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     24356       2248        424        236      21820     444624   Grand Totals
-     24356       2248        424        236      21820     444624   ELF Image Totals
+     24356       2248        424        236      21820     447224   Grand Totals
+     24356       2248        424        236      21820     447224   ELF Image Totals
      24356       2248        424        236          0          0   ROM Totals
 
 ==============================================================================
